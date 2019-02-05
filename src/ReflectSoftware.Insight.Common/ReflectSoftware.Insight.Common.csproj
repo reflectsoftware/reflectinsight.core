@@ -12,6 +12,11 @@
   <ItemGroup>
     <PackageReference Include="Plato.NetCore.Security" Version="2019.1.28.8" />
     <PackageReference Include="Plato.NetCore.Serializers" Version="2019.1.28.8" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RI\Messaging\" />
   </ItemGroup>
 
 </Project>

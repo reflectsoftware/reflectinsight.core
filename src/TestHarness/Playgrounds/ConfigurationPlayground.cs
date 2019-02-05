@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ReflectSoftware.Insight;
 
-namespace TestHarness
+namespace TestHarness.Playgrounds
 {
     public static class ConfigurationPlayground
     {
         static public void Run()
         {
+            var ri = RILogManager.Get("Test");
+
+            ri.SendMessage("Test1");
+            ri.SendMessage("Test2");
         }
     }
 }

@@ -24,35 +24,27 @@ namespace ReflectSoftware.Insight
         public Type ElementType { get; set; }
         public List<DataSetTypeMapProperty> Properties { get; set; }
     }
-
-    internal class MiniDumpResult
-    {
-        public RICustomData CustomData { get; set; }        
-        public String ShortStatus { get; set; }
-        public String LongStatus { get; set; }
-        public Boolean MissingDlgdll { get; set; }
-    }
             
     static internal class SimpleAPIHelper
 	{
-        private readonly static String FLine;
+        private readonly static string FLine;
         private readonly static Dictionary<Type, DataSetTypeMap> DataSetTypeMaps;
 				
 		static SimpleAPIHelper()
 		{
-			FLine = String.Format("{0,40}", String.Empty).Replace(" ", "-");
+			FLine = string.Format("{0,40}", string.Empty).Replace(" ", "-");
             DataSetTypeMaps = new Dictionary<Type, DataSetTypeMap>();
 		}	
 		
-		static public String GetIdentedCallStack(List<String> ignoreUptoAnyLine)
+		static public string GetIdentedCallStack(List<string> ignoreUptoAnyLine)
 		{
 			Int32 highestIgnore = -1;
 			StringBuilder sbFrames = new StringBuilder();
-			String[] frames = Environment.StackTrace.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
+			string[] frames = Environment.StackTrace.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 			
 			for (Int32 i = 0; i < frames.Length; i++)
 			{
-				foreach (String ignore in ignoreUptoAnyLine)
+				foreach (string ignore in ignoreUptoAnyLine)
 				{
 					if (frames[i].Contains(ignore))
 					{
@@ -77,9 +69,9 @@ namespace ReflectSoftware.Insight
 			return sbFrames.ToString();
 		}
         
-        static public String GetCallStack(List<String> ignoreUptoAnyLine)
+        static public string GetCallStack(List<string> ignoreUptoAnyLine)
         {
-            return GetIdentedCallStack(ignoreUptoAnyLine).Replace("\t", String.Empty);
+            return GetIdentedCallStack(ignoreUptoAnyLine).Replace("\t", string.Empty);
         }
 		
 		static public RICustomData GetThreadInformation(Thread aThread)
@@ -125,12 +117,12 @@ namespace ReflectSoftware.Insight
             cat.AddRow("Priority Boost", process.PriorityBoostEnabled.ToString());
 
             cat = cData.AddCategory("Memory Information");
-            cat.AddRow("Non-Paged System Memory", String.Format("{0} KB", (process.NonpagedSystemMemorySize64 / 1024).ToString("N0")));
-            cat.AddRow("Paged System Memory", String.Format("{0} KB", (process.PagedSystemMemorySize64 / 1024).ToString("N0")));
-            cat.AddRow("Paged Memory", String.Format("{0} KB", (process.PagedMemorySize64 / 1024).ToString("N0")));
-            cat.AddRow("Peak Paged Memory", String.Format("{0} KB", (process.PeakPagedMemorySize64 / 1024).ToString("N0")));
-            cat.AddRow("Peak Virtual Memory", String.Format("{0} KB", (process.PeakVirtualMemorySize64 / 1024).ToString("N0")));
-            cat.AddRow("Private Memory", String.Format("{0} KB", (process.PrivateMemorySize64 / 1024).ToString("N0")));
+            cat.AddRow("Non-Paged System Memory", string.Format("{0} KB", (process.NonpagedSystemMemorySize64 / 1024).ToString("N0")));
+            cat.AddRow("Paged System Memory", string.Format("{0} KB", (process.PagedSystemMemorySize64 / 1024).ToString("N0")));
+            cat.AddRow("Paged Memory", string.Format("{0} KB", (process.PagedMemorySize64 / 1024).ToString("N0")));
+            cat.AddRow("Peak Paged Memory", string.Format("{0} KB", (process.PeakPagedMemorySize64 / 1024).ToString("N0")));
+            cat.AddRow("Peak Virtual Memory", string.Format("{0} KB", (process.PeakVirtualMemorySize64 / 1024).ToString("N0")));
+            cat.AddRow("Private Memory", string.Format("{0} KB", (process.PrivateMemorySize64 / 1024).ToString("N0")));
 
             return cData;
         }
@@ -153,20 +145,20 @@ namespace ReflectSoftware.Insight
             columns.Add(new RICustomDataColumn("Strong Named"));
             columns.Add(new RICustomDataColumn("GAC"));
             
-            RICustomData cData = new RICustomData(String.Format("{0}: Loaded Assemblies", AppDomain.CurrentDomain.FriendlyName), columns, true, false) { AllowSort = true };
+            RICustomData cData = new RICustomData(string.Format("{0}: Loaded Assemblies", AppDomain.CurrentDomain.FriendlyName), columns, true, false) { AllowSort = true };
 			
-			String tmpStr = String.Empty;
+			string tmpStr = string.Empty;
 			foreach (Assembly assem in AppDomain.CurrentDomain.GetAssemblies())
 			{
 				RICustomDataRow row = cData.AddRow();
 				
 				Int32 j = 0;
-				String[] fns1 = assem.FullName.Split(',');
-				foreach (String s1 in fns1)
+				string[] fns1 = assem.FullName.Split(',');
+				foreach (string s1 in fns1)
 				{
 					if (j != 0)
 					{
-						String[] fns2 = s1.Split('=');
+						string[] fns2 = s1.Split('=');
 						tmpStr = fns2[1].Trim();
 
 						switch (j)
@@ -235,7 +227,7 @@ namespace ReflectSoftware.Insight
 		{
             RICustomDataFieldIdType fType = RICustomDataFieldIdType.Integer;
             RICustomDataColumnJustificationType sIndexJustification = RICustomDataColumnJustificationType.Right;
-            String sIndex = "Index";
+            string sIndex = "Index";
             
             if (enumerator is IDictionary)
             {
@@ -303,13 +295,13 @@ namespace ReflectSoftware.Insight
 
 			foreach (DataColumn dCol in fromTable.Columns)
 			{				
-                String[] itemArray = new String[schemaTable.Columns.Count];
+                string[] itemArray = new String[schemaTable.Columns.Count];
 				itemArray[0] = dCol.Caption;
 				itemArray[1] = dCol.DataType.FullName;
                 itemArray[2] = Boolean.FalseString;
                 itemArray[3] = dCol.AutoIncrement ? Boolean.TrueString : Boolean.FalseString;
 				itemArray[4] = dCol.MaxLength.ToString();
-				itemArray[5] = dCol.DefaultValue != null ? dCol.DefaultValue.ToString() : String.Empty;
+				itemArray[5] = dCol.DefaultValue != null ? dCol.DefaultValue.ToString() : string.Empty;
                 itemArray[6] = dCol.AllowDBNull ? Boolean.TrueString : Boolean.FalseString;
                 itemArray[7] = dCol.Unique ? Boolean.TrueString : Boolean.FalseString;
                 itemArray[8] = dCol.ReadOnly ? Boolean.TrueString : Boolean.FalseString;
@@ -407,7 +399,7 @@ namespace ReflectSoftware.Insight
                 return new DataSet("Empty");
             }
 
-            HashSet<String> tableNames = new HashSet<String>();
+            HashSet<string> tableNames = new HashSet<string>();
             DataSet ds = new DataSet();
             try
             {
@@ -440,12 +432,12 @@ namespace ReflectSoftware.Insight
                     
                     // ensure that table names are unique
                     Int32 nameIdx = 2;
-                    String tableName = elementType.Name;
+                    string tableName = elementType.Name;
                     do
                     {
                         if (tableNames.Contains(tableName))
                         {
-                            tableName = String.Format("{0} ({1})", elementType.Name, nameIdx++);
+                            tableName = string.Format("{0} ({1})", elementType.Name, nameIdx++);
                             continue;
                         }
 

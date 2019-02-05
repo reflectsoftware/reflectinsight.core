@@ -16,8 +16,7 @@ namespace ReflectSoftware.Insight
             FAssemblies = new Hashtable();
 
             FListenerTypeList = new Hashtable
-            {
-                ["Viewer"] = "ReflectSoftware.Insight.ListenerViewer, ReflectSoftware.Insight",
+            {                
                 ["BinaryFile"] = "ReflectSoftware.Insight.ListenerBinaryFile, ReflectSoftware.Insight",
                 ["TextFile"] = "ReflectSoftware.Insight.ListenerTextFile, ReflectSoftware.Insight",
                 ["Console"] = "ReflectSoftware.Insight.ListenerConsole, ReflectSoftware.Insight",
@@ -28,19 +27,21 @@ namespace ReflectSoftware.Insight
         private static Object LoadObject(String typeString)
         {
             if (string.IsNullOrWhiteSpace(typeString))
+            {
                 return null;
+            }
 
-            Regex regSeparate = new Regex(@",\s*");
-            String[] sList = regSeparate.Split(typeString);
+            var regSeparate = new Regex(@",\s*");
+            var sList = regSeparate.Split(typeString);
 
             if (sList.Length != 2)
             {                
                 throw new ReflectInsightException(String.Format("Invalid Object type setting '{0}'.", typeString));
             }
 
-            Object rValue = null;
-            String objectType = sList[0].Trim();
-            String objectAssembly = sList[1].Trim();
+            var rValue = (object)null;
+            var objectType = sList[0].Trim();
+            var objectAssembly = sList[1].Trim();
 
             Assembly oAssembly = (Assembly)FAssemblies[objectAssembly];
             if (oAssembly == null)
@@ -49,9 +50,11 @@ namespace ReflectSoftware.Insight
                 FAssemblies[objectAssembly] = oAssembly;
             }
 
-            Type oType = oAssembly.GetType(objectType, false, true);
+            var oType = oAssembly.GetType(objectType, false, true);
             if (oType != null)
+            {
                 rValue = Activator.CreateInstance(oType, true);
+            }
 
             return rValue;
         }
@@ -66,14 +69,18 @@ namespace ReflectSoftware.Insight
                     // Not defined in configuration.
                     // Lets search the default list
                     typeString = (String)FListenerTypeList[listenerName];
-                    
-                    if( typeString == null)
+
+                    if (typeString == null)
+                    {
                         throw new ReflectInsightException(String.Format("Cannot find Listener definition for: '{0}'", listenerName));
+                    }
                 }
 
-                IReflectInsightListener rValue = (IReflectInsightListener)LoadObject(typeString);
+                var rValue = (IReflectInsightListener)LoadObject(typeString);
                 if (rValue == null)
+                {
                     throw new ReflectInsightException(String.Format("Cannot find or load Listener '{0}' for type: {1}", listenerName, typeString));
+                }
 
                 return rValue;
             }

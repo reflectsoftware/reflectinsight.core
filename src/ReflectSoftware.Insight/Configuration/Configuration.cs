@@ -1,16 +1,15 @@
+using Plato.Configuration;
+using Plato.Extensions;
+using ReflectSoftware.Insight.Common;
 using System;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
+using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
+using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
-using Plato.Extensions;
-using Plato.Configuration;
-using ReflectSoftware.Insight.Common;
 
 namespace ReflectSoftware.Insight
 {
@@ -233,7 +232,7 @@ namespace ReflectSoftware.Insight
 
                 if (fullPathConfigFile.ToLower() != AppConfigFullFileName.ToLower())
                 {
-                    appConfig = ReadAndCreateConfigobject(fullPathConfigFile);
+                    appConfig = ReadAndCreateConfigObject(fullPathConfigFile);
                     activeFileName = fullPathConfigFile;
                 }
             }
@@ -249,7 +248,7 @@ namespace ReflectSoftware.Insight
                 CreateAppConfigFileWatcher();
 
                 var activeFileName = (string)null;
-                ReflectInsightConfig appConfig = ReadAndCreateConfigobject(AppConfigFullFileName);
+                ReflectInsightConfig appConfig = ReadAndCreateConfigObject(AppConfigFullFileName);
                 ReflectInsightConfig activeConfig = GetActiveApplicationConfig(appConfig, out activeFileName);
                 
                 LastConfigFullPath = activeFileName;
@@ -282,7 +281,7 @@ namespace ReflectSoftware.Insight
                     case WatcherChangeTypes.Deleted:
                     case WatcherChangeTypes.Changed:                    
                     {                                                                                    
-                        ReflectInsightConfig appConfig = ReadAndCreateConfigobject(e.FullPath);
+                        ReflectInsightConfig appConfig = ReadAndCreateConfigObject(e.FullPath);
                         if (appConfig != null && appConfig.GetBaseConfigChangeAttribute("enabled", "true") == "false")
                         {
                             break;
@@ -341,7 +340,7 @@ namespace ReflectSoftware.Insight
             }
 		}
         
-        private static ReflectInsightConfig ReadAndCreateConfigobject(string configFile)
+        private static ReflectInsightConfig ReadAndCreateConfigObject(string configFile)
 		{
             var exception = (Exception)null;
 
@@ -450,7 +449,7 @@ namespace ReflectSoftware.Insight
 
                 if (CurrentConfigurationMode != ConfigurationMode.External || externalConfigFile.ToLower() != LastConfigFullPath.ToLower())
                 {
-                    ReflectInsightConfig appConfig = ReadAndCreateConfigobject(externalConfigFile);
+                    ReflectInsightConfig appConfig = ReadAndCreateConfigObject(externalConfigFile);
 
                     DisposeAppConfigFileWatcher();
                     DisposeExternConfigFileWatcher();

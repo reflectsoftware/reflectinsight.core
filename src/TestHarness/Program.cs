@@ -6,7 +6,7 @@ namespace TestHarness
     {
         static void Main(string[] args)
         {
-            ConfigurationPlayground.Run();
+            Playgrounds.ConfigurationPlayground.Run();
         }
     }
 }

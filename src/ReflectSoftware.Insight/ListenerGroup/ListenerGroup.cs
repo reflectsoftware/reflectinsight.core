@@ -58,13 +58,6 @@ namespace ReflectSoftware.Insight
         public String Name { get; private set; }
         public String Details { get; private set; }
 		public Boolean Enabled { get; set; }
-
-        /// <summary>
-        /// Gets or sets the binding group identifier.
-        /// </summary>
-        /// <value>
-        /// The binding group identifier.
-        /// </value>        
         public HashSet<Int32> BindingGroupIds { get; set; }
 
         internal DestinationInfo(String name, String details, Boolean bEnabled)
@@ -182,9 +175,6 @@ namespace ReflectSoftware.Insight
         }
 	}
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class DestinationBindingGroup
     {
         private HashSet<DestinationInfo> Destinations { get; set; }
