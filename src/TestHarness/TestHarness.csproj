@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReflectSoftware.Insight.Common\ReflectSoftware.Insight.Common.csproj" />
-    <ProjectReference Include="..\ReflectSoftware.Insight\ReflectSoftware.Insight.csproj" />
+    <ProjectReference Include="..\ReflectSoftware.Insight\ReflectInsight.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
