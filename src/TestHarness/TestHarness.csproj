@@ -3,11 +3,15 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>ReflectSoftware Inc.</Authors>
+    <Product>ReflectInsight.Core</Product>
+    <Description>TestHarness for ReflectInsight.Core</Description>
+    <Copyright>Copyright (C) 2019 ReflectSoftware Inc.</Copyright>
+    <PackageProjectUrl>https://github.com/reflectsoftware/reflectinsight.core</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReflectSoftware.Insight.Common\ReflectSoftware.Insight.Common.csproj" />
-    <ProjectReference Include="..\ReflectSoftware.Insight\ReflectSoftware.Insight.csproj" />
+    <ProjectReference Include="..\ReflectSoftware.Insight\ReflectInsight.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
