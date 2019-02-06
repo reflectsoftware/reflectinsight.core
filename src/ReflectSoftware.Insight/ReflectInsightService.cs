@@ -1,4 +1,8 @@
-﻿using System;
+﻿// ReflectInsight.Core
+// Copyright (c) 2019 ReflectSoftware Inc.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+
+using System;
 using System.Diagnostics;
 using Plato.Extensions;
 
@@ -34,7 +38,8 @@ namespace ReflectSoftware.Insight
         static private void OnStartup()
         {
             try
-            {                                                                
+            {
+                RIExceptionManager.OnStartup();
                 MessageQueue.OnStartup();
                 MessageManager.OnStartup();
                 RIListenerGroupManager.OnStartup();
@@ -44,7 +49,7 @@ namespace ReflectSoftware.Insight
                 TraceMethod.OnStartup();
                 ReflectInsight.OnStartup();                
                 RIEventManager.DoOnStartup();
-                                
+                                                
                 RITraceListener.OnStartup();
             }
             catch (Exception ex)
@@ -53,7 +58,7 @@ namespace ReflectSoftware.Insight
             }
         }
         
-        static private void OnShutdown(Object sender, EventArgs e)
+        static private void OnShutdown(object sender, EventArgs e)
         {            
             OnShutdown();
         }
@@ -72,7 +77,7 @@ namespace ReflectSoftware.Insight
                 RILogManager.OnShutdown();
                 RIListenerGroupManager.OnShutdown();                
                 ReflectInsightConfig.OnShutdown();
-                TraceMethod.OnShutdown();
+                TraceMethod.OnShutdown();                
 
                 RITraceListener.OnShutdown();                            
             }

@@ -11,7 +11,6 @@ namespace TestHarness.Playgrounds
         {
             var ri = RILogManager.Get("Test");
 
-
             ri.EnterMethod("MyEnter");
             ri.SendMessage("Test1");
             ri.SendMessage("Test2");

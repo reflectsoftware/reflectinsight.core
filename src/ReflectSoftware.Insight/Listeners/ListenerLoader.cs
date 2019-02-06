@@ -1,3 +1,7 @@
+// ReflectInsight.Core
+// Copyright (c) 2019 ReflectSoftware Inc.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+
 using ReflectSoftware.Insight.Common;
 using System;
 using System.Collections;
@@ -24,7 +28,7 @@ namespace ReflectSoftware.Insight
             };
         }
 
-        private static Object LoadObject(String typeString)
+        private static object LoadObject(string typeString)
         {
             if (string.IsNullOrWhiteSpace(typeString))
             {
@@ -42,8 +46,8 @@ namespace ReflectSoftware.Insight
             var rValue = (object)null;
             var objectType = sList[0].Trim();
             var objectAssembly = sList[1].Trim();
+            var oAssembly = (Assembly)FAssemblies[objectAssembly];
 
-            Assembly oAssembly = (Assembly)FAssemblies[objectAssembly];
             if (oAssembly == null)
             { 
                 oAssembly = AppDomain.CurrentDomain.Load(objectAssembly);
@@ -59,16 +63,16 @@ namespace ReflectSoftware.Insight
             return rValue;
         }
 
-        public static IReflectInsightListener Get(String listenerName)
+        public static IReflectInsightListener Get(string listenerName)
         {
             lock (FListenerTypeList)
             {
-                String typeString = ReflectInsightConfig.Settings.GetListenerType(listenerName);
+                var typeString = ReflectInsightConfig.Settings.GetListenerType(listenerName);
                 if (typeString == null)
                 {
                     // Not defined in configuration.
                     // Lets search the default list
-                    typeString = (String)FListenerTypeList[listenerName];
+                    typeString = (string)FListenerTypeList[listenerName];
 
                     if (typeString == null)
                     {

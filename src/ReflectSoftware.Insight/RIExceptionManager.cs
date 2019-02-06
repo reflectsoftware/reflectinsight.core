@@ -1,24 +1,31 @@
-﻿using Plato.Extensions;
+﻿// ReflectInsight.Core
+// Copyright (c) 2019 ReflectSoftware Inc.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+
+using Plato.Extensions;
+using Plato.Interfaces;
 using Plato.Miscellaneous;
+using Plato.Strings;
 using System;
 using System.Collections.Specialized;
 
 namespace ReflectSoftware.Insight
 {
+    /// <summary>
+    /// 
+    /// </summary>
     static public class RIExceptionManager
     {
-        // TODO: static private ExceptionManagerBase FExceptionManagerComposite;     
-        // TODO: static private IExceptionPublisher FDefaultExceptionPublisher;        
-        static private TimeSpan FEventTracker;
+        static private TimeSpan _eventTracking;
+        static private ILogTextFileWriterFactory _logTextFileWriterFactory;
+        static private ILogTextFileWriter _logTextFileWriter;
 
         /// <summary>
         /// Initializes the <see cref="RIExceptionManager"/> class.
         /// </summary>
         static RIExceptionManager()
         {
-            // TODO: FExceptionManagerComposite = new ExceptionManagerBase(ReflectInsightConfig.LastConfigFullPath, "./configuration/insightSettings/exceptionManagement", "ReflectInsight Library", false, false);
-            // TODO: FDefaultExceptionPublisher = new ExceptionEventPublisher("ReflectInsight Library");
-
+            _logTextFileWriterFactory = new LogTextFileWriterFactory();
             ReflectInsightService.Initialize();
         }
 
@@ -35,9 +42,29 @@ namespace ReflectSoftware.Insight
         /// </summary>
         static internal void OnConfigFileChange()
         {
-            FEventTracker = new TimeSpan(0, ReflectInsightConfig.Settings.GetExceptionEventTracker(20), 0);
-            // TODO: FExceptionManagerComposite.ForceLoadConfigFile();
-            // TODO: FExceptionManagerComposite.OnConfigFileChange();
+            _eventTracking = new TimeSpan(0, ReflectInsightConfig.Settings.GetExceptionEventTracker(20), 0);
+
+            var mode = ReflectInsightConfig.Settings.GetExceptionManagerAttribute("mode", "off");
+            var filePath = ReflectInsightConfig.Settings.GetExceptionManagerAttribute("filePath", @"$(workingdir)\RI.Exceptions.txt");
+            var recycle = ReflectInsightConfig.Settings.GetExceptionManagerAttribute("recycle", "7");
+
+            var oldWriter = _logTextFileWriter;
+
+            if (mode == "on")
+            {
+                if (int.TryParse(recycle, out int irecycle) == false)
+                {
+                    irecycle = 7;
+                }
+
+                _logTextFileWriter = _logTextFileWriterFactory.Create(filePath, irecycle, true);
+            }
+            else
+            {
+                _logTextFileWriter = new LogNullFileWriter();
+            }
+
+            oldWriter?.Dispose();
         }
 
         /// <summary>
@@ -45,18 +72,8 @@ namespace ReflectSoftware.Insight
         /// </summary>
         static internal void OnShutdown()
         {
-            // TODO: 
-            //if (FExceptionManagerComposite != null)
-            //{
-            //    FExceptionManagerComposite.Dispose();
-            //    FExceptionManagerComposite = null;
-            //}
-
-            //if (FDefaultExceptionPublisher != null)
-            //{
-            //    MiscHelper.DisposeObject(FDefaultExceptionPublisher);
-            //    FDefaultExceptionPublisher = null;
-            //}
+            _logTextFileWriter?.Dispose();
+            _logTextFileWriter = null;
         }
 
         /// <summary>
@@ -66,9 +83,9 @@ namespace ReflectSoftware.Insight
         /// <returns>
         ///   <c>true</c> if this instance can event the specified ex; otherwise, <c>false</c>.
         /// </returns>
-        static public Boolean CanEvent(Exception ex)
+        static public bool CanEvent(Exception ex)
         {
-            return TimeEventTracker.CanEvent((Int32)ex.Message.BKDRHash(), FEventTracker);
+            return TimeEventTracker.CanEvent((int)ex.Message.BKDRHash(), _eventTracking);
         }
 
         /// <summary>
@@ -81,21 +98,28 @@ namespace ReflectSoftware.Insight
             try
             {
                 // add time stamps
-                DateTime now = DateTime.Now;
+                var now = DateTime.UtcNow;
                 additionalParameters = additionalParameters ?? new NameValueCollection();
                 additionalParameters.Add("Local Time", now.ToString("yyyy/MM/dd, HH:mm:ss.fff"));
-                additionalParameters.Add("UTC", now.ToUniversalTime().ToString("yyyy/MM/dd, HH:mm:ss.fff"));            
-                                  
-                //if (FExceptionManagerComposite.Mode == PublisherManagerMode.Off)
-                //    return;
+                additionalParameters.Add("UTC", now.ToUniversalTime().ToString("yyyy/MM/dd, HH:mm:ss.fff"));
 
-                //if (PublisherCount != 0)
-                //{
-                //    FExceptionManagerComposite.Publish(ex, additionalParameters);
-                //    return;
-                //}
+                if (!TimeEventTracker.CanEvent(ex.Message, _eventTracking, out int occurrences))
+                {
+                    return;
+                }
 
-                //FDefaultExceptionPublisher.Publish(ex, additionalParameters);
+
+                additionalParameters = additionalParameters ?? new NameValueCollection();
+
+                if (occurrences != 0)
+                {
+                    additionalParameters = additionalParameters ?? new NameValueCollection();
+                    additionalParameters["Occurrences"] = occurrences.ToString("N0");
+                }
+
+                var message = ExceptionFormatter.ConstructMessage(ex, additionalParameters);
+                _logTextFileWriter.WriteLine(message);
+
             }
             catch (Exception)
             {
@@ -108,12 +132,12 @@ namespace ReflectSoftware.Insight
         /// </summary>
         /// <param name="ex">The ex.</param>
         /// <param name="additionalInfo">The additional information.</param>
-        static public void Publish(Exception ex, String additionalInfo)
+        static public void Publish(Exception ex, string additionalInfo)
         {
-            NameValueCollection additionalParams = new NameValueCollection();
-            additionalParams.Add("Additional Info", additionalInfo);
-
-            Publish(ex, additionalParams);
+            Publish(ex, new NameValueCollection
+            {
+                { "Additional Info", additionalInfo }
+            });
         }
 
         /// <summary>
@@ -143,7 +167,7 @@ namespace ReflectSoftware.Insight
         /// </summary>
         /// <param name="ex">The ex.</param>
         /// <param name="additionalInfo">The additional information.</param>
-        static public void PublishIfEvented(Exception ex, String additionalInfo)
+        static public void PublishIfEvented(Exception ex, string additionalInfo)
         {
             if (CanEvent(ex))
             {
@@ -162,52 +186,40 @@ namespace ReflectSoftware.Insight
                 Publish(ex);
             }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Plato.Interfaces.ILogTextFileWriter" />
+    internal class LogNullFileWriter : ILogTextFileWriter
+    {
+        public string LogFilePath => string.Empty;
+        public bool CreateDirectory => false;
+        public int RecycleNumber => 0;
+        public bool Disposed => true;
 
         /// <summary>
-        /// Removes the type of the publisher by.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <param name="pType">Type of the p.</param>
-        static public void RemovePublisherByType(Type pType)
-        {
-            // TODO: FExceptionManagerComposite.RemovePublisherByType(pType);
+        public void Dispose()
+        {            
         }
 
         /// <summary>
-        /// Removes the name of the publisher by.
+        /// Writes the specified MSG.
         /// </summary>
-        /// <param name="name">The name.</param>
-        static public void RemovePublisherByName(String name)
-        {
-            // TODO: FExceptionManagerComposite.RemovePublisherByName(name);
+        /// <param name="msg">The MSG.</param>
+        public void Write(string msg)
+        {            
         }
-
-        // TODO:         
-        //static public void AddPublisher(IExceptionPublisher publisher, NameValueCollection parameters)
-        //{
-        //    FExceptionManagerComposite.AddPublisher(publisher, parameters);
-        //}
 
         /// <summary>
-        /// Gets the publisher count.
+        /// Writes the line.
         /// </summary>
-        /// <value>
-        /// The publisher count.
-        /// </value>
-        static public Int32 PublisherCount
-        {
-            get { return 0; } // TODO:  return FExceptionManagerComposite.PublisherCount; }
+        /// <param name="msg">The MSG.</param>
+        public void WriteLine(string msg)
+        {            
         }
-
-        // TODO: 
-        //static public PublisherInfo[] PublisherInfos
-        //{
-        //    get { return FExceptionManagerComposite.PublisherInfos; }
-        //}
-
-        // TODO: 
-        //static public IExceptionPublisher[] Publishers
-        //{
-        //    get { return FExceptionManagerComposite.Publishers; }
-        //}
     }
 }

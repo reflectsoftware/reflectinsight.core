@@ -1,3 +1,7 @@
+// ReflectInsight.Core
+// Copyright (c) 2019 ReflectSoftware Inc.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+
 using Plato.Configuration;
 using Plato.Extensions;
 using ReflectSoftware.Insight.Common;
@@ -843,6 +847,12 @@ namespace ReflectSoftware.Insight
         {
             return GetAttribute("./logManager", attName, defaultValue);
         }
+
+        public string GetExceptionManagerAttribute(string attName, string defaultValue)
+        {
+            return GetAttribute("./exceptionManagement", attName, defaultValue);
+        }
+
 
         public XmlNode GetNode(string xPath)
         {

@@ -1,3 +1,7 @@
+// ReflectInsight.Core
+// Copyright (c) 2019 ReflectSoftware Inc.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+
 using Plato.Extensions;
 using Plato.Serializers;
 using Plato.Serializers.FormatterPools;
@@ -10,6 +14,10 @@ using System.Linq;
 
 namespace ReflectSoftware.Insight.Common.Data
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Plato.Serializers.Interfaces.IFastBinarySerializable" />
     public class ReflectInsightExtendedProperties : IFastBinarySerializable
     {
         public String Caption { get; set; }
