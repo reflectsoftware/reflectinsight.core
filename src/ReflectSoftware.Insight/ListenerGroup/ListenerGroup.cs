@@ -89,7 +89,7 @@ namespace ReflectSoftware.Insight
         {
         }
         
-        internal DestinationInfo(String name): this(name, "Viewer", true)
+        internal DestinationInfo(String name): this(name, "Console", true)
         {
         }
         
@@ -457,7 +457,7 @@ namespace ReflectSoftware.Insight
 		
         public DestinationInfo AddDestination(String name)
 		{
-            return AddDestination(name, "Viewer", true);
+            return AddDestination(name, "Console", true);
 		}
         
         public DestinationInfo GetDestination(Int32 id)

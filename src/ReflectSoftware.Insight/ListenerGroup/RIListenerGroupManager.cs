@@ -110,7 +110,7 @@ namespace ReflectSoftware.Insight
                 {
                     // default group doesn't exist, add it
                     FDefaultGroup = new ListenerGroup("_default", true, false);
-                    FDefaultGroup.AddDestination("_default", "Viewer");
+                    FDefaultGroup.AddDestination("_default", "Console");
                     AddGroup(FDefaultGroup, true);
                 }
             }

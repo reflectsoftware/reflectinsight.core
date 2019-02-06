@@ -173,12 +173,14 @@ namespace ReflectSoftware.Insight.Common
                         requestExtention.Dispose();
                         ThreadRequestionExtension = null;
                     }
-                    
 
-                    UInt32 threadId = (UInt32)Thread.CurrentThread.ManagedThreadId;
+
+                    var threadId = (UInt32)Thread.CurrentThread.ManagedThreadId + ReflectInsightService.SessionId;
 
                     if (Thread.CurrentThread.IsThreadPoolThread)
-                        CallContext.SetData(ThreadDataName, new Object());                        
+                    {
+                        CallContext.SetData(ThreadDataName, new Object());
+                    }
 
                     bNew = true;
                     requestExtention = new RequestObjectExtension(threadId);

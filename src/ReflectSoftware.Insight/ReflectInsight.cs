@@ -139,10 +139,12 @@ namespace ReflectSoftware.Insight
 		#region Protected        
 		static private ControlValues GetControlValues()
 		{            
-            ControlValues rValue = RequestManager.GetRequestObject();
+            var rValue = RequestManager.GetRequestObject();
 
-			if (rValue.ShouldClear)
-				rValue.Clear();
+            if (rValue.ShouldClear)
+            {
+                rValue.Clear();
+            }
 
 			return rValue;
 		}
@@ -167,9 +169,11 @@ namespace ReflectSoftware.Insight
 		{
             // No need to construct the ListenerGroup if we're not enabled.
             if (!Enabled)
+            {
                 return;
+            }
 
-			ListenerGroup lgroup = RIListenerGroupManager.ActiveGroup;
+			var lgroup = RIListenerGroupManager.ActiveGroup;
             if (lgroup == null || !lgroup.Enabled)
                 return;
 
@@ -2631,7 +2635,7 @@ namespace ReflectSoftware.Insight
 
 		static public Int32 Indent()
 		{
-			ControlValues controlValues = GetControlValues();
+			var controlValues = GetControlValues();
             
             controlValues.IndentValue.Increment();
 			return controlValues.IndentValue.Level;
@@ -2661,25 +2665,24 @@ namespace ReflectSoftware.Insight
 	{
 		private const SByte RI_MAX_INDENT = 20;     
 		private SByte FLevel = 0;
-
-		///--------------------------------------------------------------------
+		
 		public void Increment()
 		{
 			FLevel++;
 			if (FLevel > RI_MAX_INDENT)
 				FLevel = RI_MAX_INDENT;
 		}
-		///--------------------------------------------------------------------
+
 		public void Decrement()
 		{
 			if( FLevel > 0 ) FLevel--;
 		}
-		///--------------------------------------------------------------------
+
 		public void Reset() 
 		{ 
 			FLevel = 0; 
 		}
-		///--------------------------------------------------------------------
+
 		public SByte Level
 		{
 			get { return FLevel; }

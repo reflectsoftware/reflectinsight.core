@@ -79,7 +79,7 @@ namespace ReflectSoftware.Insight
         public void Attached(UInt32 requestId)
         {
             RequestId = requestId;
-            ThreadId = (UInt32)Thread.CurrentThread.ManagedThreadId;
+            ThreadId = (UInt32)Thread.CurrentThread.ManagedThreadId + ReflectInsightService.SessionId;
             SendPack = new SendPack();
             IndentValue = new IndentValue();
             CheckpointSet = new CheckpointSetContainer();
@@ -145,7 +145,9 @@ namespace ReflectSoftware.Insight
             if (States.ContainsKey(key))
             {
                 if (bDispose)
+                {
                     States[key].DisposeObject();
+                }
 
                 States.Remove(key);
             }
