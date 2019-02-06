@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Sol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. ReflectInsight", "1. ReflectInsight", "{21227F15-5451-413C-A339-85FEB308A340}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectInsight.Core", "src\ReflectSoftware.Insight\ReflectInsight.Core.csproj", "{B18BD15D-BBC2-4411-A52B-C1A47BE5A82B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectSoftware.Insight", "src\ReflectSoftware.Insight\ReflectSoftware.Insight.csproj", "{B18BD15D-BBC2-4411-A52B-C1A47BE5A82B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. TestHarness", "2. TestHarness", "{5620BC7D-8BB6-4A2F-AA8A-4C8ECF87FFA6}"
 EndProject
