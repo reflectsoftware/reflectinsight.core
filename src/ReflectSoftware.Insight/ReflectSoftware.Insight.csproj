@@ -1,18 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>ReflectSoftware Inc.</Authors>
-    <Company>ReflectSoftware Inc.ReflectSoftware Inc.</Company>
-    <Product>ReflectInsight.Core</Product>
+    <Company>ReflectSoftware Inc.</Company>
+    <Product>ReflectSoftware.Insight</Product>
     <PackageId>ReflectInsight.Core</PackageId>
     <Description>ReflectInsight .NET Core</Description>
-    <Copyright>Copyright (C) 2019 ReflectSoftware Inc.</Copyright>
+    <Copyright>Copyright © 2019 ReflectSoftware Inc.</Copyright>
     <PackageProjectUrl>https://github.com/reflectsoftware/reflectinsight.core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/reflectsoftware/reflectinsight.core</RepositoryUrl>
     <PackageTags>ReflectInsight logs logging .NETCore netcore net-core structured-logging</PackageTags>
-    <Version>6.0.0</Version>
+    <Version>6.0.0-beta</Version>
     <AssemblyName>ReflectSoftware.Insight</AssemblyName>
     <RootNamespace>ReflectSoftware.Insight</RootNamespace>
   </PropertyGroup>

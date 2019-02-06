@@ -13,7 +13,11 @@ namespace ReflectSoftware.Insight
         static public event Action OnServiceConfigChange;        
         static public event Action OnStartup;        
         static public event Action OnShutdown;
-        
+
+        /// <summary>
+        /// Does the on send internal exception.
+        /// </summary>
+        /// <param name="ex">The ex.</param>
         static internal void DoOnSendInternalException(Exception ex)
         {
             try
@@ -26,7 +30,11 @@ namespace ReflectSoftware.Insight
                 RIExceptionManager.Publish(exc, "Failed during: RIEventManager.DoOnSendInternalException()");
             }
         }
-        
+
+        /// <summary>
+        /// Does the on queue exception.
+        /// </summary>
+        /// <param name="ex">The ex.</param>
         static internal void DoOnQueueException(Exception ex)
         {
             try
@@ -40,6 +48,10 @@ namespace ReflectSoftware.Insight
             }
         }
 
+        /// <summary>
+        /// Does the on created instance.
+        /// </summary>
+        /// <param name="ri">The ri.</param>
         static internal void DoOnCreatedInstance(ReflectInsight ri)
         {
             try
@@ -52,6 +64,10 @@ namespace ReflectSoftware.Insight
             }
         }
 
+        /// <summary>
+        /// Does the on configuration settings initialized.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
         static internal void DoOnConfigSettingsInitialized(ReflectInsightConfig settings)
         {
             try
@@ -63,7 +79,10 @@ namespace ReflectSoftware.Insight
                 RIExceptionManager.Publish(ex, "Failed during: RIEventManager.DoOnConfigSettingsInitialized()");
             }
         }
-        
+
+        /// <summary>
+        /// Does the on configuration change.
+        /// </summary>
         static internal void DoOnConfigChange()
         {
             try
@@ -75,7 +94,10 @@ namespace ReflectSoftware.Insight
                 RIExceptionManager.Publish(ex, "Failed during: RIEventManager.DoOnConfigChange()");
             }
         }
-        
+
+        /// <summary>
+        /// Does the on service configuration change.
+        /// </summary>
         static internal void DoOnServiceConfigChange()
         {
             try
@@ -87,7 +109,10 @@ namespace ReflectSoftware.Insight
                 RIExceptionManager.Publish(ex, "Failed during: RIEventManager.DoOnServiceConfigChange()");
             }
         }
-        
+
+        /// <summary>
+        /// Does the on startup.
+        /// </summary>
         static internal void DoOnStartup()
         {
             try
@@ -99,7 +124,10 @@ namespace ReflectSoftware.Insight
                 RIExceptionManager.Publish(ex, "Failed during: RIEventManager.DoOnStartup()");
             }
         }
-        
+
+        /// <summary>
+        /// Does the on shutdown.
+        /// </summary>
         static internal void DoOnShutdown()
         {
             try
