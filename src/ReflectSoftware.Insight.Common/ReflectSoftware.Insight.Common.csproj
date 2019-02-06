@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>6.0.0</Version>
+    <PackageId>ReflectInsight.Core.Common</PackageId>
+    <Authors>ReflectSoftware Inc.</Authors>
+    <Company>ReflectSoftware Inc.</Company>
+    <Product>ReflectInsight.Core.Common</Product>
+    <Description>ReflectInsight .NET Core</Description>
+    <Copyright>Copyright (C) 2019 ReflectSoftware Inc.</Copyright>
+    <PackageProjectUrl>https://github.com/reflectsoftware/reflectinsight.core</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/reflectsoftware/reflectinsight.core</RepositoryUrl>
+    <PackageTags>ReflectInsight logs logging .NETCore netcore net-core structured-logging</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

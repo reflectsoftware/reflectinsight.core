@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Solution Items", "00. Solution Items", "{162F742A-6F5F-480D-9BFC-11480A9B7C30}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{162F742A-6F5F-480D-9BFC-11480A9B7C30}"
 	ProjectSection(SolutionItems) = preProject
 		src\ReflectInsight.Core.licenseheader = src\ReflectInsight.Core.licenseheader
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. ReflectInsight", "01. ReflectInsight", "{21227F15-5451-413C-A339-85FEB308A340}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. ReflectInsight", "1. ReflectInsight", "{21227F15-5451-413C-A339-85FEB308A340}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectSoftware.Insight.Common", "src\ReflectSoftware.Insight.Common\ReflectSoftware.Insight.Common.csproj", "{F60C7487-014A-4453-B9EC-E50C0FF6A0E2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectSoftware.Insight", "src\ReflectSoftware.Insight\ReflectSoftware.Insight.csproj", "{B18BD15D-BBC2-4411-A52B-C1A47BE5A82B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. TestHarness", "02. TestHarness", "{5620BC7D-8BB6-4A2F-AA8A-4C8ECF87FFA6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. TestHarness", "2. TestHarness", "{5620BC7D-8BB6-4A2F-AA8A-4C8ECF87FFA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "src\TestHarness\TestHarness.csproj", "{DA19756A-1B61-4207-AF27-AD64DB01CAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestHarness", "src\TestHarness\TestHarness.csproj", "{DA19756A-1B61-4207-AF27-AD64DB01CAE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
