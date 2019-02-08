@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>ReflectSoftware Inc.</Authors>
     <Company>ReflectSoftware Inc.</Company>
@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="Plato.NetCore" Version="2019.2.6.1" />
-    <PackageReference Include="Plato.NetCore.Configuration" Version="2019.2.6.1" />
-    <PackageReference Include="Plato.NetCore.Security" Version="2019.2.6.1" />
-    <PackageReference Include="Plato.NetCore.Serializers" Version="2019.2.6.1" />
+    <PackageReference Include="Plato.NetCore" Version="2019.2.7.2" />
+    <PackageReference Include="Plato.NetCore.Configuration" Version="2019.2.7.2" />
+    <PackageReference Include="Plato.NetCore.Security" Version="2019.2.7.2" />
+    <PackageReference Include="Plato.NetCore.Serializers" Version="2019.2.7.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
