@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/reflectsoftware/reflectinsight.core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/reflectsoftware/reflectinsight.core</RepositoryUrl>
     <PackageTags>ReflectInsight logs logging .NETCore netcore net-core structured-logging</PackageTags>
-    <Version>6.0.0-beta</Version>
+    <Version>6.0.0</Version>
     <AssemblyName>ReflectSoftware.Insight</AssemblyName>
     <RootNamespace>ReflectSoftware.Insight</RootNamespace>
   </PropertyGroup>
