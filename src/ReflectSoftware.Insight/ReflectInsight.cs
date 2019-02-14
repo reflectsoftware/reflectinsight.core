@@ -200,7 +200,7 @@ namespace ReflectSoftware.Insight
             package.FProcessID = ReflectInsightService.ProcessId;
             package.FSessionID = ReflectInsightService.SessionId;
             package.FRequestID = controlValues.RequestId;
-            package.FThreadID = (Int32)controlValues.ThreadId;
+            package.FThreadID = Math.Abs((Int32)controlValues.ThreadId);
             package.FApplication = FDomainName;
             package.FDomainID = Thread.GetDomainID();
             package.FCategory = Category;
