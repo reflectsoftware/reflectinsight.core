@@ -49,7 +49,7 @@ namespace ReflectSoftware.Insight
                 TraceMethod.OnStartup();
                 ReflectInsight.OnStartup();                
                 RIEventManager.DoOnStartup();
-                                                
+
                 RITraceListener.OnStartup();
             }
             catch (Exception ex)

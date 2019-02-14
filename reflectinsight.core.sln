@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. TestHarness", "2. TestHa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestHarness", "src\TestHarness\TestHarness.csproj", "{DA19756A-1B61-4207-AF27-AD64DB01CAE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebHarness", "src\TestWebHarness\TestWebHarness.csproj", "{67329701-4C7E-456B-9595-1D0CD6647581}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{DA19756A-1B61-4207-AF27-AD64DB01CAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA19756A-1B61-4207-AF27-AD64DB01CAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA19756A-1B61-4207-AF27-AD64DB01CAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67329701-4C7E-456B-9595-1D0CD6647581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67329701-4C7E-456B-9595-1D0CD6647581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67329701-4C7E-456B-9595-1D0CD6647581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67329701-4C7E-456B-9595-1D0CD6647581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B18BD15D-BBC2-4411-A52B-C1A47BE5A82B} = {21227F15-5451-413C-A339-85FEB308A340}
 		{DA19756A-1B61-4207-AF27-AD64DB01CAE3} = {5620BC7D-8BB6-4A2F-AA8A-4C8ECF87FFA6}
+		{67329701-4C7E-456B-9595-1D0CD6647581} = {5620BC7D-8BB6-4A2F-AA8A-4C8ECF87FFA6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7165FA6-9808-4FF0-81AF-8651B2D9C823}

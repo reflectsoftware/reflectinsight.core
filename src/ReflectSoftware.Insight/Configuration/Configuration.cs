@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
@@ -79,21 +80,21 @@ namespace ReflectSoftware.Insight
             FSubsections = new Dictionary<string, NameValueCollection>();            
         }
 
-        private static string AppConfigFullFileName
+        public static string AppConfigFullFileName()
 		{
-			get { return ConfigHelper.GetRootConfigFile().ToLower(); }
-		}
+            return ConfigHelper.GetRootConfigFile();
+        }
 
         private static void OnConfigFileChanged(object source, FileSystemEventArgs e)
         {
             try
             {
-                FileSystemWatcher fileWatcher = (source as FileSystemWatcher);
+                var fileWatcher = (source as FileSystemWatcher);
                 if (fileWatcher != null) fileWatcher.EnableRaisingEvents = false;
 
                 try
                 {
-                    DateTime newFileTimestamp = File.GetLastWriteTime(e.FullPath);
+                    var newFileTimestamp = File.GetLastWriteTime(e.FullPath);
                     if (newFileTimestamp != FLastFileChangeTimestamp)
                     {
                         FLastFileChangeTimestamp = newFileTimestamp;
@@ -160,7 +161,7 @@ namespace ReflectSoftware.Insight
                     try
                     {
                         FAppConfigFileWatcher.Path = AppDomain.CurrentDomain.BaseDirectory;
-                        FAppConfigFileWatcher.Filter = Path.GetFileName(AppConfigFullFileName);
+                        FAppConfigFileWatcher.Filter = Path.GetFileName(AppConfigFullFileName());
                         FAppConfigFileWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.Size;
                         FAppConfigFileWatcher.Changed += OnConfigFileChanged;
                         FAppConfigFileWatcher.Created += OnConfigFileChanged;
@@ -175,7 +176,7 @@ namespace ReflectSoftware.Insight
                 catch (Exception ex)
                 {                 
                     DisposeAppConfigFileWatcher();
-                    RIExceptionManager.Publish(ex, string.Format("ReflectInsightConfig: Cannot create FileSystemWatcher for file: {0}", AppConfigFullFileName));
+                    RIExceptionManager.Publish(ex, string.Format("ReflectInsightConfig: Cannot create FileSystemWatcher for file: {0}", AppConfigFullFileName()));
                 }
             }
         }
@@ -215,7 +216,7 @@ namespace ReflectSoftware.Insight
         
         private static ReflectInsightConfig GetActiveApplicationConfig(ReflectInsightConfig appConfig, out string activeFileName)
         {
-            activeFileName = AppConfigFullFileName;
+            activeFileName = AppConfigFullFileName();
 
             if (appConfig == null)
             {
@@ -234,7 +235,7 @@ namespace ReflectSoftware.Insight
                 // just in case someone is trying to play smart by assigning the external source name 
                 // to the App Config file name, just ignore and assume the app config file only
 
-                if (fullPathConfigFile.ToLower() != AppConfigFullFileName.ToLower())
+                if (fullPathConfigFile.ToLower() != AppConfigFullFileName().ToLower())
                 {
                     appConfig = ReadAndCreateConfigObject(fullPathConfigFile);
                     activeFileName = fullPathConfigFile;
@@ -252,13 +253,13 @@ namespace ReflectSoftware.Insight
                 CreateAppConfigFileWatcher();
 
                 var activeFileName = (string)null;
-                ReflectInsightConfig appConfig = ReadAndCreateConfigObject(AppConfigFullFileName);
+                ReflectInsightConfig appConfig = ReadAndCreateConfigObject(AppConfigFullFileName());
                 ReflectInsightConfig activeConfig = GetActiveApplicationConfig(appConfig, out activeFileName);
                 
                 LastConfigFullPath = activeFileName;
                 CurrentConfigurationMode = ConfigurationMode.Application;
 
-                if (LastConfigFullPath.ToLower() != AppConfigFullFileName.ToLower())
+                if (LastConfigFullPath.ToLower() != AppConfigFullFileName().ToLower())
                 {
                     CurrentConfigurationMode = ConfigurationMode.ApplicationExternal;
                     CreateExternConfigFileWatcher(LastConfigFullPath);
