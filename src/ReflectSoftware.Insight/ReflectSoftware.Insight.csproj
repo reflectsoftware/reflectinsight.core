@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="Plato.NetCore" Version="2019.2.13.3" />
-    <PackageReference Include="Plato.NetCore.Configuration" Version="2019.2.13.3" />
-    <PackageReference Include="Plato.NetCore.Security" Version="2019.2.13.3" />
-    <PackageReference Include="Plato.NetCore.Serializers" Version="2019.2.13.3" />
+    <PackageReference Include="Plato.NetCore" Version="2019.2.20.2" />
+    <PackageReference Include="Plato.NetCore.Configuration" Version="2019.2.20.2" />
+    <PackageReference Include="Plato.NetCore.Security" Version="2019.2.20.2" />
+    <PackageReference Include="Plato.NetCore.Serializers" Version="2019.2.20.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
