@@ -15,6 +15,8 @@
     <Version>6.0.1.0</Version>
     <AssemblyName>ReflectSoftware.Insight</AssemblyName>
     <RootNamespace>ReflectSoftware.Insight</RootNamespace>
+    <AssemblyVersion>6.0.2.0</AssemblyVersion>
+    <FileVersion>6.0.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,10 +25,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Plato.NetCore" Version="2019.7.3.1" />
-    <PackageReference Include="Plato.NetCore.Configuration" Version="2019.7.3.1" />
-    <PackageReference Include="Plato.NetCore.Security" Version="2019.7.3.1" />
-    <PackageReference Include="Plato.NetCore.Serializers" Version="2019.7.3.1" />
+    <PackageReference Include="Plato.NetCore" Version="2019.9.22.3" />
+    <PackageReference Include="Plato.NetCore.Configuration" Version="2019.9.22.3" />
+    <PackageReference Include="Plato.NetCore.Security" Version="2019.9.22.3" />
+    <PackageReference Include="Plato.NetCore.Serializers" Version="2019.9.22.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
