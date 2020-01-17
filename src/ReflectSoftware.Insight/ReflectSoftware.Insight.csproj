@@ -12,11 +12,11 @@
     <PackageProjectUrl>https://github.com/reflectsoftware/reflectinsight.core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/reflectsoftware/reflectinsight.core</RepositoryUrl>
     <PackageTags>ReflectInsight logs logging .NETCore netcore net-core structured-logging</PackageTags>
-    <Version>6.0.8.0</Version>
+    <Version>6.0.9.0</Version>
     <AssemblyName>ReflectSoftware.Insight</AssemblyName>
     <RootNamespace>ReflectSoftware.Insight</RootNamespace>
-    <AssemblyVersion>6.0.8.0</AssemblyVersion>
-    <FileVersion>6.0.8.0</FileVersion>
+    <AssemblyVersion>6.0.9.0</AssemblyVersion>
+    <FileVersion>6.0.9.0</FileVersion>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
@@ -27,10 +27,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Plato.NetCore" Version="2020.1.16.2" />
-    <PackageReference Include="Plato.NetCore.Configuration" Version="2020.1.16.2" />
-    <PackageReference Include="Plato.NetCore.Security" Version="2020.1.16.2" />
-    <PackageReference Include="Plato.NetCore.Serializers" Version="2020.1.16.2" />
+    <PackageReference Include="Plato.NetCore" Version="2020.1.16.3" />
+    <PackageReference Include="Plato.NetCore.Configuration" Version="2020.1.16.3" />
+    <PackageReference Include="Plato.NetCore.Security" Version="2020.1.16.3" />
+    <PackageReference Include="Plato.NetCore.Serializers" Version="2020.1.16.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
